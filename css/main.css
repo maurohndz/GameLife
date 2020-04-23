@@ -1,0 +1,17 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#grid {
+  border: 1px solid black;
+}
+.Info_col {
+  width: 500px;
+  height: 500px;
+  background-color: #03294f;
+  margin-right: 10px;
+  color: white;
+  padding: 20px;
+}
