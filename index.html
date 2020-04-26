@@ -16,18 +16,16 @@
   <body>
     <div class="Info Info_col">
       <h1>Game of Life</h1>
-      <p>
-        It is a zero-player game, which means that its evolution is determined
-        by the initial state and does not require any subsequent data entry. The
-        "game board" is a flat mesh made up of squares (the "cells") that
-        extends infinity in all directions. Therefore, each cell has 8
-        "neighboring" cells, which are next to it, including the diagonal ones.
-        Cells have two states: they are "alive" or "dead" (or "on" and "off").
-        The state of the cells evolved over discrete units of time (I could say
-        in turns).
-      </p>
+      <p>Living cells: <span id="set_cont_cell"></span></p>
       <br />
+      <button id="btn_generate" class="btn-primary btn-block">
+        Generate Pattern
+      </button>
       <button id="btn_Start" class="btn-primary btn-block">Start</button>
+      <button id="btn_Stop" class="btn-primary btn-block">Stop</button>
+      <button id="btn_Automaton" class="btn-primary btn-block">
+        Automaton
+      </button>
     </div>
 
     <div class="Canva">

@@ -3,11 +3,16 @@
 /*===========================================*/
 const grid = document.getElementById("grid");
 const btn_Start = document.getElementById("btn_Start");
+const btn_generate = document.getElementById("btn_generate");
+const set_cont_cell = document.getElementById("set_cont_cell");
+const btn_Automaton = document.getElementById("btn_Automaton");
+const btn_Stop = document.getElementById("btn_Stop");
 
 /*===========================================*/
 /* settings */
 /*===========================================*/
-const Data = new Array();
+var Data = new Array();
+var interval = true;
 const ctx = grid.getContext("2d");
 const { clientHeight, clientWidth } = ctx.canvas;
 const fps = 6;
@@ -123,19 +128,41 @@ window.addEventListener("load", () => {
 });
 
 /*===========================================*/
-/* Start */
+/* Start and stop*/
 /*===========================================*/
 btn_Start.addEventListener("click", () => {
-  setInterval(() => {
-    Main();
+  interval = true;
+  const run = setInterval(() => {
+    if (interval) {
+      Main();
+    } else {
+      clearInterval(run);
+    }
   }, 1000 / fps);
   // Main();
+});
+
+btn_Stop.addEventListener("click", () => {
+  interval = false;
+});
+/*===========================================*/
+/* Generate new data and Automaton*/
+/*===========================================*/
+btn_generate.addEventListener("click", () => {
+  Data = [];
+  GenerateData();
+  ClearGrid();
+});
+btn_Automaton.addEventListener("click", () => {
+  GenerateAutomata();
+  ClearGrid();
 });
 
 /*===========================================*/
 /* Main funtion */
 /*===========================================*/
 const Main = () => {
+  let cont = 0;
   for (let y = 0; y < nRow; y++) {
     for (let x = 0; x < nColumn; x++) {
       let cell = Data[y][x];
@@ -147,9 +174,10 @@ const Main = () => {
     for (let x = 0; x < nColumn; x++) {
       let cell = Data[y][x];
       cell.cellMutation();
+      cont = cont + cell.nextState;
     }
   }
-
+  SetContWindow(cont);
   ClearGrid();
 };
 
@@ -170,15 +198,53 @@ const GenerateNoise = () => {
 /*===========================================*/
 const GenerateData = () => {
   let row = [];
+  let cont = 0;
   for (let y = 0; y < nRow; y++) {
     for (let x = 0; x < nColumn; x++) {
-      row.push(new Cell(x, y, GenerateNoise()));
+      let cellState = GenerateNoise();
+      row.push(new Cell(x, y, cellState));
+      cont = cont + cellState;
     }
     Data.push(row);
     row = [];
   }
-};
 
+  SetContWindow(cont);
+};
+/*===========================================*/
+/* Generar Automaton 2, 4*/
+/*===========================================*/
+const GenerateAutomata = () => {
+  Data = [];
+  let row = [];
+  for (let y = 0; y < nRow; y++) {
+    for (let x = 0; x < nColumn; x++) {
+      if (x === 2 && y === 4) {
+        row.push(new Cell(x, y, 1));
+      } else if (x === 3 && y === 4) {
+        row.push(new Cell(x, y, 1));
+      } else if (x === 4 && y === 4) {
+        row.push(new Cell(x, y, 1));
+      } else if (x === 4 && y === 3) {
+        row.push(new Cell(x, y, 1));
+      } else if (x === 3 && y === 2) {
+        row.push(new Cell(x, y, 1));
+      } else {
+        row.push(new Cell(x, y, 0));
+      }
+    }
+    Data.push(row);
+    row = [];
+  }
+
+  SetContWindow(5);
+};
+/*===========================================*/
+/* Set count window */
+/*===========================================*/
+const SetContWindow = (cont) => {
+  set_cont_cell.innerHTML = cont;
+};
 /*===========================================*/
 /* Generar Grid Line*/
 /*===========================================*/
