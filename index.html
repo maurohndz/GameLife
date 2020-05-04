@@ -3,35 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
+    <title>Game Life</title>
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
-    <div class="Info Info_col">
-      <h1>Game of Life</h1>
-      <p>Living cells: <span id="set_cont_cell"></span></p>
-      <br />
-      <button id="btn_generate" class="btn-primary btn-block">
-        Generate Pattern
-      </button>
-      <button id="btn_Start" class="btn-primary btn-block">Start</button>
-      <button id="btn_Stop" class="btn-primary btn-block">Stop</button>
-      <button id="btn_Automaton" class="btn-primary btn-block">
-        Automaton
-      </button>
+    <div class="Header">
+      <div class="Menu">
+        <div class="Container">
+          <ul class="List_menu List_menu_left">
+            <li class="Item_menu Item_menu_left" id="Generate_Pattern">
+              Generate pattern
+            </li>
+            <li class="Item_menu Item_menu_left" id="Automaton">Automaton</li>
+          </ul>
+          <h1 class="Title">Game Life</h1>
+          <ul class="List_menu List_menu_right">
+            <li class="Item_menu Item_menu_right" id="Start">Start</li>
+            <li class="Item_menu Item_menu_right" id="Stop">Stop</li>
+          </ul>
+        </div>
+      </div>
+      <div class="Info">
+        <div class="Info_item">
+          <p class="Info_item_title">Living cells</p>
+          <p class="Info_item_value">0</p>
+        </div>
+        <div class="Info_item">
+          <p class="Info_item_title">Generation</p>
+          <p class="Info_item_value">1</p>
+        </div>
+      </div>
     </div>
-
     <div class="Canva">
-      <canvas id="grid" width="500" height="500"></canvas>
+      <canvas id="grid" class="Camvas_item"></canvas>
     </div>
 
-    <script src="./js/app.js"></script>
+    <!-- JS -->
+    <script src="./js/main.js"></script>
+    <script src="./js//controllers.js"></script>
   </body>
 </html>
